@@ -10,8 +10,9 @@ public class UIController : MonoBehaviour
 {
     
     [SerializeField] private Text messageText;
-    [SerializeField] private GameObject canvas, uiCam, player, playerCam, conversationUI, startUI, conversationNxtBtn, conversationOkayBtn, envelope;
+    [SerializeField] private GameObject canvas, uiCam, player, playerCam, conversationUI, startUI, conversationNxtBtn, conversationOkayBtn, envelope, thinkingEmoji, tuneEmoji, gameOver;
 
+    [SerializeField] private Text gameOverTextField;
     [SerializeField] private Text[] chatTextField;
     [SerializeField] private string[] chatList;
 
@@ -69,6 +70,23 @@ public class UIController : MonoBehaviour
 
     public void ShowEnvelope(){
         envelope.SetActive(true);
+    }
+
+    public void ShowThinkingEmoji(){
+        thinkingEmoji.SetActive(true);
+    }
+
+    public void OnClickEnvelopeBtn(){
+        if(GameManager.Instance.GetChestState()){
+            thinkingEmoji.SetActive(false);
+            tuneEmoji.SetActive(true);
+            Invoke("ShowGameOver",2f);
+        }
+    }
+
+    private void ShowGameOver(){
+        gameOver.SetActive(true);
+        TextWriter.AddWriter_Static(gameOverTextField, "Game Over!", .1f, true, true, StopTalkingSound);
     }
 
     private void StartTalkingSound() {

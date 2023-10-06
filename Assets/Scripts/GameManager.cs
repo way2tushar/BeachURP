@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject envelopeModel;
 
     private bool isEnvelopeCatched;
+    private bool isChestOpened;
 
     public static GameManager Instance;
 
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         UIController.Instance.ShowInitMessage();
         Cursor.visible = true;
         isEnvelopeCatched = false;
+        isChestOpened = false;
     }
 
     public void StartGame(){
@@ -68,7 +70,21 @@ public class GameManager : MonoBehaviour
         UIController.Instance.ShowEnvelope();
     }
 
+    public void ChestOpened(){
+        isChestOpened = true;
+        PausePlayerMovement();
+        UIController.Instance.ShowThinkingEmoji();
+    }
+
     public void ShowEnvelopeModel(){
         envelopeModel.SetActive(true);
+    }
+
+    public bool GetEnvelopeState(){
+        return isEnvelopeCatched;
+    }
+
+    public bool GetChestState(){
+        return isChestOpened;
     }
 }
