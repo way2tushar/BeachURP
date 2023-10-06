@@ -129,7 +129,7 @@ public class UIController : MonoBehaviour
         HideHealthTimer();
         gameOver.SetActive(true);
         envelope.SetActive(false);
-        TextWriter.AddWriter_Static(gameOverTextField, "Game Over!", .1f, true, true, StopTalkingSound);
+        TextWriter.AddWriter_Static(gameOverTextField, "Congratulations.you discovered the hidden key mystery of this shore.\nGame task completed", .1f, true, true, StopTalkingSound);
     }
 
     private void HideHealthTimer(){
