@@ -5,14 +5,17 @@ using UnityEngine.UI;
 using CodeMonkey.Utils;
 using TMPro;
 using StarterAssets;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     
     [SerializeField] private Text messageText;
-    [SerializeField] private GameObject canvas, uiCam, player, playerCam, conversationUI, startUI, conversationNxtBtn, conversationOkayBtn, envelope, thinkingEmoji, tuneEmoji, gameOver;
+    [SerializeField] private GameObject canvas, uiCam, player, playerCam, conversationUI, startUI, conversationNxtBtn, conversationOkayBtn, envelope, thinkingEmoji, tuneEmoji, gameOver, timeUP,
+    healthObj, timerObj, deadUI;
 
     [SerializeField] private Text gameOverTextField;
+    [SerializeField] private Slider slider;
     [SerializeField] private Text[] chatTextField;
     [SerializeField] private string[] chatList;
 
@@ -39,6 +42,8 @@ public class UIController : MonoBehaviour
         playerCam.SetActive(true);
         player.SetActive(true);
         GameManager.Instance.StartGame();
+        healthObj.SetActive(true);
+        timerObj.SetActive(true);
     }
 
     public void ShowConversation(){
@@ -84,9 +89,52 @@ public class UIController : MonoBehaviour
         }
     }
 
+    public void ShowTimeUP(){
+        timeUP.SetActive(true);
+        HideHealthTimer();
+    }
+
+    public void ShowDeadUI(){
+        deadUI.SetActive(true);
+        HideHealthTimer();
+    }
+
+    public void ReloadGame(){
+        SceneManager.LoadScene(0);
+    }
+
+    public void SetHealthSlider(float state){
+        if(state < .7 && state > .4){
+            ChangeFillColor(Color.yellow);
+        }
+        else if(state <= .4){
+            ChangeFillColor(Color.red);
+        }
+        slider.value = state;
+
+    }
+    
+
+    // Function to change the fill color
+    private void ChangeFillColor(Color newColor)
+    {
+        // Access the Fill image component of the Slider
+        Image fillImage = slider.fillRect.GetComponent<Image>();
+
+        // Change the color of the Fill image
+        fillImage.color = newColor;
+    }
+
     private void ShowGameOver(){
+        HideHealthTimer();
         gameOver.SetActive(true);
+        envelope.SetActive(false);
         TextWriter.AddWriter_Static(gameOverTextField, "Game Over!", .1f, true, true, StopTalkingSound);
+    }
+
+    private void HideHealthTimer(){
+        healthObj.SetActive(false);
+        timerObj.SetActive(false);
     }
 
     private void StartTalkingSound() {
