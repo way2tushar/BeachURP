@@ -153,6 +153,5 @@ public class GameManager : MonoBehaviour
 
     public void SetWaterTouch(bool state){
         isWaterTouched = state;
-        Debug.Log("water touch: " + state);
     }
 }

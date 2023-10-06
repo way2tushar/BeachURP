@@ -8,7 +8,6 @@ public class StrangerController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Paise");
             UIController.Instance.ShowConversation();
         }
     }
