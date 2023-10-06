@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private ThirdPersonController thirdPersonController;
     [SerializeField] private StarterAssetsInputs starterAssetsInputs;
+    [SerializeField] private GameObject envelopeModel;
+
+    private bool isEnvelopeCatched;
 
     public static GameManager Instance;
 
@@ -31,6 +34,7 @@ public class GameManager : MonoBehaviour
     private void Init(){
         UIController.Instance.ShowInitMessage();
         Cursor.visible = true;
+        isEnvelopeCatched = false;
     }
 
     public void StartGame(){
@@ -57,5 +61,14 @@ public class GameManager : MonoBehaviour
         starterAssetsInputs.cursorLocked = true;
         starterAssetsInputs.cursorInputForLook = true;
         HideCursor();
+    }
+
+    public void CatchEnvelope(){
+        isEnvelopeCatched = true;
+        UIController.Instance.ShowEnvelope();
+    }
+
+    public void ShowEnvelopeModel(){
+        envelopeModel.SetActive(true);
     }
 }

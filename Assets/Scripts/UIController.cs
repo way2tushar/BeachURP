@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
 {
     
     [SerializeField] private Text messageText;
-    [SerializeField] private GameObject canvas, uiCam, player, playerCam, conversationUI, startUI, conversationNxtBtn, conversationOkayBtn;
+    [SerializeField] private GameObject canvas, uiCam, player, playerCam, conversationUI, startUI, conversationNxtBtn, conversationOkayBtn, envelope;
 
     [SerializeField] private Text[] chatTextField;
     [SerializeField] private string[] chatList;
@@ -61,8 +61,14 @@ public class UIController : MonoBehaviour
 
     public void OnClickOkayBtn(){
         GameManager.Instance.ResumePlayerMovement();
+        GameManager.Instance.ShowEnvelopeModel();
         conversationUI.SetActive(false);
         canvas.SetActive(false);
+
+    }
+
+    public void ShowEnvelope(){
+        envelope.SetActive(true);
     }
 
     private void StartTalkingSound() {
