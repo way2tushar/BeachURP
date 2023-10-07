@@ -85,6 +85,7 @@ public class UIController : MonoBehaviour
         if(GameManager.Instance.GetChestState()){
             thinkingEmoji.SetActive(false);
             tuneEmoji.SetActive(true);
+            GameManager.Instance.SetGameOver();
             Invoke("ShowGameOver",2f);
         }
     }
@@ -112,6 +113,10 @@ public class UIController : MonoBehaviour
         }
         slider.value = state;
 
+    }
+
+    public void OnClickExitBtn(){
+        Application.Quit();
     }
     
 

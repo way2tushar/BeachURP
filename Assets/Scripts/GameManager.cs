@@ -151,6 +151,11 @@ public class GameManager : MonoBehaviour
         isTimeUP = true;
     }
 
+    public void SetGameOver(){
+        isGameOver = true;
+        TimerScript.Instance.TimerOn = false;
+    }
+
     public void SetWaterTouch(bool state){
         isWaterTouched = state;
     }
